@@ -1,28 +1,36 @@
 #include "iGraphics.h"
 
-
-void drawHomepage();
-
-//Start Page
-void drawStartPage();
-void startbuttonClickHandler();
-int startButtonClick = 0;
-int Homepage = 1;
-int StartPage = 0;
-
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Idraw Here::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::://
+int a, b, c, d, e, f;
+
+float x = 0;
+
+void drawHomePage();
+void drawStartPage();
+
+void startButtonClickHandler();
+
+int startButtonClick = 0;
+
+
+int homePage = 1;
+int startPage = 0;
+
 
 void iDraw()
 {
 	iClear();
-		iFilledRectangle(10, 10, 100, 100);
-		iSetColor(255, 255, 255);
-	if (Homepage == 1) {
-		drawHomepage(); 
+	
+	if (homePage == 1)
+	{
+		drawHomePage();
 	}
-	else if (StartPage == 1){
+	else if (startPage == 1){
 		drawStartPage();
 	}
+
+
+
 
 }
 
@@ -37,28 +45,30 @@ void iDraw()
 
 void iMouseMove(int mx, int my)
 {
-	
+
 }
 //*******************************************************************ipassiveMouse***********************************************************************//
 void iPassiveMouseMove(int mx, int my)
 {
-	
+
 }
 
 void iMouse(int button, int state, int mx, int my)
 {
-	
+
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-		printf("x = %d y= %d", mx, my);
-		if (Homepage = 1 && (mx>=452 && mx<=494)
-		
+		printf("x=%d  y=%d", mx, my);
+		if (homePage == 1 && (mx >= 418 && mx <= 580) && (my >= 434 && my <= 516)){
+			startButtonClickHandler();
+		}
+
 	}
-	
-	
+
+
 	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
-		
+
 	}
 }
 
@@ -70,12 +80,12 @@ key- holds the ASCII value of the key pressed.
 
 void iKeyboard(unsigned char key)
 {
-	if (key == '\r')
+	if (key == 'e')
 	{
 		
 	}
-	
-	
+
+
 }
 
 /*
@@ -90,37 +100,55 @@ GLUT_KEY_PAGE DOWN, GLUT_KEY_HOME, GLUT_KEY_END, GLUT_KEY_INSERT
 void iSpecialKeyboard(unsigned char key)
 {
 
-	
+
 	if (key == GLUT_KEY_RIGHT)
 	{
-				
+
 	}
 	if (key == GLUT_KEY_LEFT)
 	{
-		
+
 	}
-	
+
 	if (key == GLUT_KEY_HOME)
 	{
-		
+
 	}
-	
+
 }
-void drawHomepage(){
-	iSetColor(120, 120, 120);
+void drawHomePage(){
+	iSetColor(0, 0, 0);
 	iFilledRectangle(0, 0, 1000, 600);
-	iShowBMP2(0, 0, "images\\tzKyzs123.bmp", 0);
-	iSetColor(255, 255, 255);
-	iText(450, 520, "Start",GLUT_BITMAP_TIMES_ROMAN_24);
-	iText(450, 420, "Levels", GLUT_BITMAP_TIMES_ROMAN_24);
-	iText(450, 320, "About Us", GLUT_BITMAP_TIMES_ROMAN_24);
-	iText(450, 220, "Instructions", GLUT_BITMAP_TIMES_ROMAN_24);
+	iShowBMP2(0, 0,"Images//bg.bmp", 0);
+	iShowImage(400, 420, 200, 100, a);
 }
+
+void drawStartPage(){
+	iFilledRectangle(0, 0, 1000, 600);
+	
+	//iShowBMP2(x, 0, "Images//jungle1.bmp", 0); bmp use korle background move kore na
+	iShowImage(x + 1000, 0, 1000, 600, b);
+	iShowImage(x, 0, 1000, 600, b); // ei jonno image use korlam
+	x -= 0.05;
+	if (x < -1000)
+		x = 0;
+
+}
+void startButtonClickHandler()
+{
+	homePage = 0;
+	startPage = 1;
+}
+
 
 int main()
 {
 	///srand((unsigned)time(NULL));
-	iInitialize(1000, 600, "Roxys Adventure");
+	iInitialize(1000, 600, "Project-0");
+	a = iLoadImage("Images//PlayButton.png");
+	b = iLoadImage("Images//jungle.jpg");
+
+
 	///updated see the documentations
 	iStart();
 	return 0;
